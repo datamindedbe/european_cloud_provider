@@ -1,0 +1,18 @@
+api:
+  host: linkedin-data-api.p.rapidapi.com
+  base_url: https://linkedin-data-api.p.rapidapi.com/get-company-details-by-id
+
+api_posts:
+  host: linkedin-data-api.p.rapidapi.com
+  base_url: https://linkedin-data-api.p.rapidapi.com/get-company-posts
+
+companies:
+  data-minded:
+    id: 5306392
+  kbc-bank-en-verzekering:
+    id: 3440
+
+s3:
+  endpoint: https://s3.eu-central-3.ionoscloud.com
+  region: eu-central-3
+ 

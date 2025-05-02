@@ -1,0 +1,20 @@
+# Environment variables
+*.env
+
+# Directories
+*.terraform/
+
+# Backup files
+*.bak
+*.backup
+
+# terraform files
+*.tfstate
+*.tfstate.*
+*.terraform.*
+
+# text files
+*.txt
+
+# log files
+*.log
