@@ -71,24 +71,28 @@ def get_company_posts(company_name):
 
 
 def save_file_to_s3_details(file, s3_client, bucket_name, object_name):
+    data = file.json().get("data", {})
+    headquarter = data.get("headquarter", {})
+    founded = data.get("founded", {})
+
     company_info = {
-        "id": file.json().get("data", {}).get("id"),
-        "name": file.json().get("data", {}).get("name"),
-        "global_name": file.json().get("data", {}).get("universalName"),
-        "url_linkedin": file.json().get("data", {}).get("linkedinUrl"),
-        "tagline": file.json().get("data", {}).get("tagline"),
-        "description": file.json().get("data", {}).get("description"),
-        "type": file.json().get("data", {}).get("type"),
-        "employees_counter": file.json().get("data", {}).get("staffCount"),
-        "hq_area": file.json().get("data", {}).get("headquarter", {}).get("geographicArea"),
-        "hq_country": file.json().get("data", {}).get("headquarter", {}).get("country"),
-        "hq_city": file.json().get("data", {}).get("headquarter", {}).get("city"),
-        "hq_zip_code": file.json().get("data", {}).get("headquarter", {}).get("postalCode"),
-        "industries": file.json().get("data", {}).get("industries"),
-        "specialities": file.json().get("data", {}).get("specialities"),
-        "website": file.json().get("data", {}).get("website"),
-        "founded": file.json().get("data", {}).get("founded", {}).get("year"),
-        "followers_counter": file.json().get("data", {}).get("followerCount"),
+        "id": data.get("id"),
+        "name": data.get("name"),
+        "global_name": data.get("universalName"),
+        "url_linkedin": data.get("linkedinUrl"),
+        "tagline": data.get("tagline"),
+        "description": data.get("description"),
+        "type": data.get("type"),
+        "employees_counter": data.get("staffCount"),
+        "hq_area": headquarter.get("geographicArea"),
+        "hq_country": headquarter.get("country"),
+        "hq_city": headquarter.get("city"),
+        "hq_zip_code": headquarter.get("postalCode"),
+        "industries": data.get("industries"),
+        "specialities": data.get("specialities"),
+        "website": data.get("website"),
+        "founded": founded.get("year"),
+        "followers_counter": data.get("followerCount"),
     }
 
     csv_buffer = io.StringIO()
@@ -102,7 +106,8 @@ def save_file_to_s3_details(file, s3_client, bucket_name, object_name):
         Body=csv_buffer.getvalue().encode('utf-8')
     )
 
-def save_file_to_s3_posts(file, s3_client, bucket_name, object_name):
+
+def save_file_to_s3_posts(fetch_posts, s3_client, bucket_name, object_name):
     posts = fetch_posts.json().get("data", [])
     rows = []
     for post in posts:

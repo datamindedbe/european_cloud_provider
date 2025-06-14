@@ -1,4 +1,16 @@
 
+variable "bucket_name" {
+  type        = string
+  description = "test bucket"
+  default     = "dataminded-terraform-test"
+}
+
+variable "ionos_database_password" {
+  type        = string
+  description = "Postgres database password"
+  sensitive   = true  
+}
+
 variable "ionos_s3_access_key" {
   type        = string
   description = "S3 access key"
@@ -17,8 +29,8 @@ variable "ionos_token" {
   sensitive   = true
 }
 
-variable "bucket_name" {
+variable "ionos_user" {
   type        = string
-  description = "test bucket"
-  default     = "dataminded-terraform-test"
+  description = "User to ionos cloud"
+  sensitive = true
 }

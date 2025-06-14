@@ -9,8 +9,6 @@ api_posts:
 companies:
   data-minded:
     id: 5306392
-  kbc-bank-en-verzekering:
-    id: 3440
 
 s3:
   endpoint: https://s3.eu-central-3.ionoscloud.com
